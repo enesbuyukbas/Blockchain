@@ -164,4 +164,4 @@ test_chain.mine_block();
 
 # Blockchain'i JSON olarak dışa aktarma
 print(Fore.MAGENTA + "Blockchain JSON Formatı:")
-print(test_chain.export_to_json())
+print(test_chain.export_to_json(), Style.RESET_ALL)
