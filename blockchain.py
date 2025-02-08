@@ -12,6 +12,20 @@ class Block:
     """
     Blockchain içindeki bir blok temsili
     """
+    """
+    __init__ : 
+    Yeni bir nesne (object) oluşturulduğunda çalışır.
+    Nesneye ait başlangıç değerlerini (attributes) tanımlar.
+    return ifadesi kullanılmaz çünkü doğrudan nesneyi başlatır.
+
+    self:
+    self, bir sınıf içinde kullanılan özel bir değişkendir ve sınıfa ait özelliklere ve metotlara erişmeyi sağlar.
+    Özellikleri:
+    self, her nesneye özgü değişkenleri temsil eder.
+    Sınıfın içindeki metotlarda, nesnenin kendi verilerine erişmesini sağlar.
+    Python'da bir sınıf metodu içinde self yazılması zorunludur (ancak adı değiştirilebilir, yine de Python topluluğu self kullanır).
+    """
+    
     # Constructor
     def __init__(self, index:int, previous_hash:str, transactions: List[dict],  nonce:int=0):
         self.index = index  # Blok numarası
@@ -94,6 +108,37 @@ class Blockchain:
             self.pending_transactions = []
 
             # Blok zincirini kontrol et
+            def is_valid(self):
+                """
+                Blok zincirinin geçerliliğini kontrol eder
+                """
+                for i in range(1, len(self.chain)):
+                    current_block = self.chain[i]
+                    previous_block = self.chain[i - 1]
 
+                    # Blok hash kontrolü
+                    if current_block.hash != current_block.calculate_hash():
+                        print("Blok hash değeri hatalı")
+                        return False #hash eşleşmiyorsa false döndür
+
+                    # Önceki blok hash kontrolü
+                    if current_block.previous_hash != previous_block.hash:
+                        print("Önceki blok hash değeri hatalı")
+                        return False #önceki bloğun hash değeri eşleşmiyorsa false döndür
+                
+                # Blok zinciri geçerli
+                return True
+
+
+            #ekrana yazdır
+            def print_chain(self):
+        for block in self.chain:
+            print(f"Timestamp: {block.timestamp} \t- Block:{block.index} \t- Hash:{block.hash} \t- Önceki Hash: {block.previous_hash} \t- Transactions: {block.transactions} ")
+            # print(f"Blok:", block.index)
+            # print("Timestamp:", block.timestamp)
+            # print("Previous Hash:", block.previous_hash)
+            # print("Hash:", block.hash)
+            # print("Transactions:", block.transactions)
+            # print("\n")
 
     
