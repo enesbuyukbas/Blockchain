@@ -64,4 +64,36 @@ class Blockchain:
         })
 
     # Yeni bir blok madenciliğini yaparak blockchain'e eklesin
-    #def mine_block(self):
+    def mine_block(self): new*
+
+        if not self.pending_transactions:
+            print("Blokta işlem yok, madencilik yapılamıyor")
+            return none
+
+            #Zincirin en son bloğunu al
+            last_block = self.chain[-1]
+
+            #Yeni blok
+            new_block = Block(
+                index=len(self.chain),
+                previous_hash=last_block.hash,
+                transactions=self.pending_transactions,
+                nonce=0
+            )
+
+            #Proof of Work madenciliği
+            #belirli sayıda sıfır ile başlayan hash değeri bulunana kadar nonce değerini arttır
+            while not new_block.hash.startswith('0' * self.difficulty):
+                new_block.nonce += 1
+                new_block.hash = new_block.calculate_hash()
+            print(f"Blok madenciliği başarılı:  {new_block.hash}")
+            #yeni bloğu zincire ekle
+            self.chain.append(new_block)
+
+            #Bekleyen işlemleri temizle
+            self.pending_transactions = []
+
+            # Blok zincirini kontrol et
+
+
+    
